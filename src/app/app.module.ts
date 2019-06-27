@@ -16,6 +16,7 @@ import { CORSInterceptor } from './utils/http.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddItemComponent } from './components/add-item/add-item.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { SerachPipe } from './pipes/serach.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SharedModule } from './modules/shared/shared.module';
     DataGridComponent,
     ItemDetailComponent,
     AuthComponent,
-    AddItemComponent
+    AddItemComponent,
+    SerachPipe
   ],
   imports: [
     BrowserModule,

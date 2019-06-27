@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-3">
-    <app-search [filters]="filters$" [controls]=""></app-search>
+    {{filters$.value | json}}
+    <app-search [filters]="filters$" [controls]="['name', 'phone']"></app-search>
   </div>
   <div class="col-9" appSetColor='yellow'>
-    <app-data-grid [data]="workers" [config]="config" (actionEvent)="onAction($event)" ></app-data-grid>
+    <app-data-grid [data]="workers | serach:filters$.value" [config]="config" (actionEvent)="onAction($event)" ></app-data-grid>
   </div>
 </div>

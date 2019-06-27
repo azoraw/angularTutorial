@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounce, debounceTime, map, filter } from 'rxjs/operators';
 
 @Component({
@@ -8,16 +8,18 @@ import { debounce, debounceTime, map, filter } from 'rxjs/operators';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+
 
   @Input() controls: any[];
   @Input() filters: BehaviorSubject<any>;
   @ViewChild('f', { static: true }) form: NgForm;
+  subscr$: Subscription;
 
   constructor() { }
 
   ngOnInit() {
-    this.form.valueChanges
+    this.subscr$ = this.form.valueChanges
       .pipe(debounceTime(1000),
         filter((value) => {
           if (JSON.stringify(value).includes('@')) {
@@ -27,7 +29,7 @@ export class SearchComponent implements OnInit {
           return true;
         }),
         map((resp) => {
-          return { ...resp, lastModification: Date.now() }
+        return { ...resp/*, lastModification: Date.now()*/ }
         }))
       .subscribe((value) => {
         this.filters.next({
@@ -35,6 +37,10 @@ export class SearchComponent implements OnInit {
           ...value
         })
       })
+  }
+  
+  ngOnDestroy(): void {
+    this.subscr$.unsubscribe();
   }
 
 }

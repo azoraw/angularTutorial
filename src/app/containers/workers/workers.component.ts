@@ -18,8 +18,7 @@ export class WorkersComponent implements OnInit {
   ]
 
   filters$: BehaviorSubject<any> = new BehaviorSubject({
-    name: 5,
-    phone: 1
+
   })
   constructor(private workersService: WorkersService) {
     this.fetchWorkers();
