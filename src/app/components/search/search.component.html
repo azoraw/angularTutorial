@@ -1,0 +1,7 @@
+{{f.value | json}}
+<form #f="ngForm">
+  <label *ngFor="let control of controls">
+    {{control}}
+    <input ngModel [placeholder]="control" type="text" class="form-control" [name]="control">
+  </label>
+</form>

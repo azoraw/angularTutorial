@@ -1,0 +1,31 @@
+<ng-template #content>
+  <form #f="ngForm" id="add-item-form" class="modal-body bg-info">
+    {{f.value | json}}
+    <div class="form-group">
+      <input required ngModel class="form-control" type="text" placeholder="title" name="title">
+      <div class="badge badge-danger">
+        {{f.controls['title']?.errors | json}}
+      </div>
+    </div>
+    <div class="form-group">
+      <input required ngModel class="form-control" type="number" placeholder="price" name="price">
+      <div class="badge badge-danger">
+        {{f.controls['price']?.errors | json}}
+      </div>
+    </div>
+    <div class="form-group">
+      <select required ngModel name="category" class="form-control">
+        <option value="" disabled selected>category</option>
+        <option value="food">food</option>
+        <option value="clothes">clothes</option>
+      </select>
+      <div *ngIf="f.controls['category']?.hasError('required')" class="badge badge-danger">you must select one</div>
+    </div>
+    <hr>
+    <button [disabled]="!f.valid" type="button" class="btn btn-secondary" (click)="sendForm(f.value)">
+      send item
+    </button>
+  </form>
+</ng-template>
+
+<button (click)="open(content)" class="btn btn-success">add item</button>

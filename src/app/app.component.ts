@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  bgColor = '#ff00ff';
   title = 'ey-app';
 }

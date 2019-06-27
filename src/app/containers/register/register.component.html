@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-6">
+    <form [formGroup]="form">
+      <label>
+        <input formControlName="username" type="text">
+      </label>
+      <div class="badge badge-warning">
+        {{form.get('username').errors|json}}
+      </div>
+
+      <hr>
+
+      <label>
+        <input formControlName="birthDate" type="date">
+      </label>
+      <div class="badge badge-warning">
+        {{form.get('birthDate').errors|json}}
+      </div>
+
+      <div formGroupName="hobbies">
+        <label *ngFor="let item of form.get('hobbies').value | keyvalue">
+          {{item.key}}
+          <input type="checkbox" [formControlName]="item.key">
+        </label>
+        <div class="badge badge-warning">
+          {{form.get('hobbies').errors|json}}
+        </div>
+      </div>
+      
+    </form>
+  </div>
+  <div class="col-6">
+    <pre>{{form.value | json}}</pre>
+  </div>
+</div>

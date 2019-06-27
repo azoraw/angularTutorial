@@ -1,0 +1,9 @@
+<ng-template #tpl>
+  <form action="" class="form-inlin" #f="ngForm">
+    <input type="email" required pattern="\w+@\w+" ngModel='admin@localhost' name="username" class="form-control">
+    <input type="text" required ngModel='admin' name="password" class="form-control">
+    <button (click)="logIn(f)">log in</button>
+  </form>
+</ng-template>
+
+<button (click)="logOut()" *ngIf="authService.access; else tpl" class="btn btn-danger">log out</button>
